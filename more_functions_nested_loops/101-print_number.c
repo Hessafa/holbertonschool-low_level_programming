@@ -9,6 +9,14 @@ void print_number(int n)
 	int divisor = 1;
 	int temp;
 
+	/* Handle INT_MIN as a special case */
+	if (n == -2147483648)
+	{
+		_putchar('-');
+		_putchar('2');
+		n = 147483648;
+	}
+
 	/* Handle negative numbers */
 	if (n < 0)
 	{
