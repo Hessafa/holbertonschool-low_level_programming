@@ -1,50 +1,35 @@
 #include "main.h"
-#include <limits.h>
 
 /**
- * _atoi - Converts a string to an integer.
- * @s: Pointer to the string.
- *
- * This function converts the string to an integer, taking into account
- * leading spaces, signs, and non-numeric characters.
- *
- * Return: The converted integer.
+ * _atoi - turns string to an int.
+ * @s: params
+ * Return: something
  */
 int _atoi(char *s)
 {
-	int result = 0;
-	int sign = 1;
-	int i = 0;
+	unsigned int count = 0, size = 0, j = 0, k = 1, m = 1, i;
 
-	/* Skip leading spaces */
-	while (s[i] == ' ')
+	while (*(s + count) != '\0')
 	{
-		i++;
-	}
+		if (size > 0 && (*(s + count) < '0' || *(s + count) > '9'))
+			break;
 
-	/* Handle signs */
-	while (s[i] == '-' || s[i] == '+')
-	{
-		if (s[i] == '-')
+		if (*(s + count) == '-')
+			k *= -1;
+
+		if ((*(s + count) >= '0') && (*(s + count) <= '9'))
 		{
-			sign *= -1;
+			if (size > 0)
+				m *= 10;
+			size++;
 		}
-		i++;
+		count++;
 	}
 
-	/* Convert numeric characters to integer */
-	while (s[i] >= '0' && s[i] <= '9')
+	for (i = count - size; i < count; i++)
 	{
-		/* Check for overflow */
-		if (result > (INT_MAX / 10) ||
-		    (result == (INT_MAX / 10) && (s[i] - '0') > (INT_MAX % 10)))
-		{
-			return (sign == 1 ? INT_MAX : INT_MIN);
-		}
-
-		result = result * 10 + (s[i] - '0');
-		i++;
+		j = j + ((*(s + i) - 48) * m);
+		m /= 10;
 	}
-
-	return (result * sign);
+	return (j * k);
 }
