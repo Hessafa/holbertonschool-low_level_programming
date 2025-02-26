@@ -6,8 +6,9 @@
  * @a: Pointer to the array.
  * @n: Number of elements to print.
  *
- * This function prints the elements of the array separated by a comma and a space.
- * The numbers are displayed in the same order as they are stored in the array.
+ * This function prints the elements of the array separated by
+ * a comma and a space. The numbers are displayed in the same
+ * order as they are stored in the array.
  */
 void print_array(int *a, int n)
 {
