@@ -13,5 +13,8 @@ int _sqrt_helper(int n, int guess);
 int _putchar(char c);
 int is_prime_number(int n);
 int _is_prime_helper(int n, int i);
+int is_palindrome(char *s);
+int _check_palindrome(char *s, int start, int end);
+int _strlen(char *s);
 
 #endif
