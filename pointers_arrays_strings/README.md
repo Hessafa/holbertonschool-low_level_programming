@@ -42,3 +42,18 @@ Here is the updated table with your new task:
 | Advanced Task 11 | `char *infinite_add(char *n1, char *n2, char *r, int size_r);` | Adds two numbers represented as strings and stores the result in `r`. |
 | Advanced Task 12 | `void print_buffer(char *b, int size);`        | Prints a buffer with a given size, formatted to show the content. |
 
+
+## C - Even more pointers, arrays and strings Prototypes: 
+
+
+| Task | Prototype | Description |
+|------|-----------|-------------|
+| 0 | `char *_memset(char *s, char b, unsigned int n);` | Fills the first `n` bytes of the memory area pointed to by `s` with the constant byte `b`. |
+| 1 | `char *_memcpy(char *dest, char *src, unsigned int n);` | Copies `n` bytes from memory area `src` to memory area `dest`. |
+| 2 | `char *_strchr(char *s, char c);` | Locates the first occurrence of character `c` in the string `s`. |
+| 3 | `unsigned int _strspn(char *s, char *accept);` | Returns the length of the initial segment of `s` which consists entirely of bytes from `accept`. |
+| 4 | `char *_strpbrk(char *s, char *accept);` | Searches a string for any of a set of characters. |
+| 5 | `char *_strstr(char *haystack, char *needle);` | Finds the first occurrence of the substring `needle` in the string `haystack`. |
+| 6 | `void print_chessboard(char (*a)[8]);` | Prints a chessboard (2D array) of characters, represented by an 8x8 grid. |
+| 7 | `void print_diagsums(int *a, int size);` | Prints the sum of the two diagonals of a square matrix of integers. |
+| 8 | `void set_string(char **s, char *to);` | Sets the value of a pointer to a string, effectively changing the pointer to point to the string `to`. |
