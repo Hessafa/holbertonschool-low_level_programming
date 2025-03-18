@@ -1,35 +1,36 @@
-#include "3-calc.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "3-calc.h"
 
 /**
- * main - performs operations on two integers based on the operator passed
- * @argc: number of arguments passed to the program
- * @argv: array of arguments
+ * main - calculation
+ * @argc: number of arguments
+ * @argv: arguments
  *
- * Return: 0 on success, appropriate exit status on error
+ * Return: always 0
  */
 int main(int argc, char *argv[])
 {
-	int (*operation)(int, int);
-	int num1, num2;
+	int (*f)(int a, int b), result, n2;
 
 	if (argc != 4)
 	{
 		printf("Error\n");
 		exit(98);
 	}
-
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[3]);
-
-	operation = get_op_func(argv[2]);
-	if (operation == NULL)
+	f = get_op_func(argv[2]);
+	if (f == NULL)
 	{
 		printf("Error\n");
 		exit(99);
 	}
-
-	printf("%d\n", operation(num1, num2));
+	n2 = atoi(argv[3]);
+	if (n2 == 0 && (f == op_div || f == op_mod))
+	{
+		printf("Error\n");
+		exit(100);
+	}
+	result = f(atoi(argv[1]), n2);
+	printf("%d\n", result);
 	return (0);
 }

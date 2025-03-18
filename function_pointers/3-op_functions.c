@@ -1,11 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 /**
- * op_add - addition operator
- * @a: first int
- * @b: second int
- * Return: sum of 2 numbers
+ * op_add - Makes the sum of two numbers
+ * @a: First operand
+ * @b: Second operand
+ *
+ * Return: The sum of the two parameters
  */
 int op_add(int a, int b)
 {
@@ -13,10 +11,11 @@ int op_add(int a, int b)
 }
 
 /**
- * op_sub - subtraction operator
- * @a: first in
- * @b: second int
- * Return: difference of 2 numbers
+ * op_sub - Calculates subtraction of two numbers
+ * @a: First operand
+ * @b: Second operand
+ *
+ * Return: The subtraction of the two parameters
  */
 int op_sub(int a, int b)
 {
@@ -24,44 +23,38 @@ int op_sub(int a, int b)
 }
 
 /**
- * op_mul - product of 2 numbers
- * @a: first int
- * @b: second int
- * Return: product of the numbers
+ * op_mul - Makes the multiplication of two numbers
+ * @a: First operand
+ * @b: Second operand
+ *
+ * Return: The multiplication of the two parameters
  */
 int op_mul(int a, int b)
 {
 	return (a * b);
 }
 
+
 /**
- * op_div - division of 2 numbers
- * @a: first int
- * @b: second int
- * Return: result of the division of the numbers
+ * op_div - Makes the division of two numbers
+ * @a: First operand
+ * @b: Second operand
+ *
+ * Return: The division of the two parameters
  */
 int op_div(int a, int b)
 {
-	if (b == 0)
-	{
-		printf("Error\n");
-		exit(100);
-	}
 	return (a / b);
 }
 
 /**
- * op_mod - get remainder of the division of 2 numbers
- * @a: first int
- * @b: second int
- * Return: remainder of division of the numbers
+ * op_mod - Calculates modulo of two numbers
+ * @a: First operand
+ * @b: Second operand
+ *
+ * Return: The modulo of the two parameters
  */
 int op_mod(int a, int b)
 {
-	if (b == 0)
-	{
-		printf("Error\n");
-		exit(100);
-	}
 	return (a % b);
 }
