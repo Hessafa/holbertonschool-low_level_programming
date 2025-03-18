@@ -1,24 +1,51 @@
-#ifndef CALC_H
-#define CALC_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
- * struct op - Struct op
- *
- * @op: The operator
- * @f: The function associated with the operator
+ * main - Performs simple calculations.
+ * @argc: The number of arguments.
+ * @argv: The arguments passed to the program.
+ * 
+ * Return: 0 if the operation is successful, or exits with an error code.
  */
-typedef struct op
+int main(int argc, char *argv[])
 {
-	char *op;
-	int (*f)(int a, int b);
-} op_t;
+	int a, b, result;
+	int (*op_func)(int, int);
 
-/* Function Prototypes */
-int op_add(int a, int b);
-int op_sub(int a, int b);
-int op_mul(int a, int b);
-int op_div(int a, int b);
-int op_mod(int a, int b);
-int (*get_op_func(char *s))(int, int);
+	if (argc != 4)
+	{
+		printf("Error\n");
+		return (98);
+	}
 
-#endif /* CALC_H */
+	a = atoi(argv[1]);
+	b = atoi(argv[3]);
+
+	if (strcmp(argv[2], "+") == 0)
+		op_func = (int (*)(int, int)) (a + b);
+	else if (strcmp(argv[2], "-") == 0)
+		op_func = (int (*)(int, int)) (a - b);
+	else if (strcmp(argv[2], "*") == 0)
+		op_func = (int (*)(int, int)) (a * b);
+	else if (strcmp(argv[2], "/") == 0)
+	{
+		if (b == 0)
+		{
+			printf("Error\n");
+			return (100);
+		}
+		op_func = (int (*)(int, int)) (a / b);
+	}
+	else
+	{
+		printf("Error\n");
+		return (99);
+	}
+
+	result = op_func(a, b);
+	printf("%d\n", result);
+
+	return (0);
+}
