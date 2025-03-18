@@ -1,23 +1,20 @@
-; 100-hello_world.asm
-;
-; Author: Salomon Chambi
-; x86_64 Assembly
+; File: 100-hello_world.asm
+; Desc: 64-bit assembly program that prints
+;       Hello, World followed by a new line.
 
-section .data:
-	message db "Hello, World", 10
-
-section .text:
-	global main
+section .text
+   global main
 
 main:
-	mov rax, 1		; use the write syscall
-	mov rdi, 1		; use stdout as the file descriptor
-	mov rsi, message	; address of string to output
-	mov rdx, 13		; number of bytes
-	syscall			; invoke the write syscall
+   mov edx,len
+   mov ecx,msg
+   mov ebx,1
+   mov eax,4
+   int 0x80
 
-	; time to exit
+   mov eax,0
+   int 0x80
 
-	mov rax, 60		; use the exit syscall
-	mov rdi, 0		; return value
-	syscall			; invoke the exit syscall
+section .data
+   msg: db 'Hello, World', 0xa
+   len: equ $ - msg
