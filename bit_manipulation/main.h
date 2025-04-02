@@ -10,5 +10,5 @@
  * Return: The converted number, or 0 if b is NULL or contains invalid chars.
  */
 unsigned int binary_to_uint(const char *b);
-
+void print_binary(unsigned long int n);
 #endif /* MAIN_H */
