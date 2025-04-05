@@ -1,80 +1,50 @@
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "main.h"
-
 /**
- * open_file - Opens the file in read-only mode.
- * @filename: The name of the file.
- * Return: File descriptor or -1 on error.
- */
-int open_file(const char *filename)
-{
-	return (open(filename, O_RDONLY));
-}
-
-/**
- * allocate_buffer - Allocates buffer for reading.
- * @letters: Number of letters to read.
- * Return: Pointer to buffer or NULL on error.
- */
-char *allocate_buffer(size_t letters)
-{
-	return (malloc(sizeof(char) * letters));
-}
-
-/**
- * read_file_content - Reads content from the file.
- * @fd: File descriptor.
- * @buffer: Buffer to store content.
- * @letters: Number of letters to read.
- * Return: Number of bytes read or -1 on error.
- */
-ssize_t read_file_content(int fd, char *buffer, size_t letters)
-{
-	return (read(fd, buffer, letters));
-}
-
-/**
- * write_to_stdout - Writes buffer content to stdout.
- * @buffer: Buffer to write.
- * @bytes_read: Number of bytes to write.
- * Return: Number of bytes written or -1 on error.
- */
-ssize_t write_to_stdout(char *buffer, ssize_t bytes_read)
-{
-	return (write(STDOUT_FILENO, buffer, bytes_read));
-}
-
-/**
- * read_textfile - Reads and prints a file to stdout.
- * @filename: The file to read.
- * @letters: Number of letters to print.
- * Return: Actual letters read/printed or 0 on error.
+ * read_textfile - reads a text file and prints it to the POSIX standard output
+ * @filename: name of the file
+ * @letters: number of letters it should read and print
+ *
+ * Return: actual number of letters it could read and print
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd;
-	char *buffer;
-	ssize_t bytes_read, bytes_written;
+	/**
+	 * This function takes a string 'filename' and an integer 'letters'.
+	 * It opens the file, reads it, and prints it to stdout.
+	 */
 
-	if (!filename)
+	int fd, rd, wr;
+	char *buf;
+
+	if (filename == NULL)
 		return (0);
 
-	fd = open_file(filename);
+	buf = malloc(sizeof(char) * letters);
+	if (buf == NULL)
+		return (0);
+
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
+	{
+		free(buf);
 		return (0);
+	}
 
-	buffer = allocate_buffer(letters);
-	if (!buffer)
+	rd = read(fd, buf, letters);
+	if (rd == -1)
+	{
+		free(buf);
 		return (0);
+	}
 
-	bytes_read = read_file_content(fd, buffer, letters);
-	bytes_written = write_to_stdout(buffer, bytes_read);
+	wr = write(STDOUT_FILENO, buf, rd);
+	if (wr == -1 || wr != rd)
+	{
+		free(buf);
+		return (0);
+	}
 
+	free(buf);
 	close(fd);
-	free(buffer);
-
-	return ((bytes_read == bytes_written) ? bytes_written : 0);
+	return (wr);
 }
